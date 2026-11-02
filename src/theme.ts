@@ -24,5 +24,4 @@ export const fonts = {
 
 export const spacing = { none: 0, sm: 8, md: 16, lg: 24, xl: 32 };
 
-// Poster look: (almost) square corners everywhere
 export const radius = { sm: 2, md: 2, lg: 4, full: 999 };

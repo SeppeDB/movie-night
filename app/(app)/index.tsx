@@ -35,7 +35,6 @@ export default function GroupsScreen() {
     }
   }, []);
 
-  // Reload whenever the page comes back into view, e.g. after leaving a group
   useFocusEffect(
     useCallback(() => {
       loadGroups();

@@ -46,7 +46,6 @@ export function InputField({
   );
 }
 
-// Underline-only inputs, like a form printed on a poster
 const styles = StyleSheet.create({
   container: { gap: 4 },
   input: {
@@ -56,7 +55,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.border,
     paddingVertical: 10,
-    // 16px or more stops iOS Safari from zooming in on focus
     fontSize: 18,
   },
   inputFocused: { borderBottomColor: colors.primary },

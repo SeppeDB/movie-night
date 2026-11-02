@@ -13,7 +13,6 @@ export default function RootLayout() {
   const init = useAuthStore((state) => state.init);
   useEffect(() => init(), [init]);
 
-  // Not gated on loading: the pre-rendered HTML should still show the page, briefly in a fallback font
   useFonts({
     Fraunces_400Regular_Italic,
     Fraunces_600SemiBold,

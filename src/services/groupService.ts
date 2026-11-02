@@ -1,7 +1,6 @@
 import { supabase } from './api';
 import type { Group, GroupDetails } from '../types/Group';
 
-// Shapes of the rows Supabase returns for the selects below
 interface GroupRow {
   id: string;
   name: string;
@@ -23,7 +22,6 @@ interface CreatedGroupRow {
 }
 
 export async function getMyGroups(): Promise<Group[]> {
-  // RLS only returns groups the current user is a member of
   const { data, error } = await supabase
     .from('groups')
     .select('id, name, invite_code, group_members(count)')
@@ -71,7 +69,6 @@ export async function joinGroup(code: string): Promise<Group> {
   const { data, error } = await supabase.rpc('join_group', { code });
   if (error !== null) throw new Error(error.message);
   const row = data as CreatedGroupRow;
-  // The member count isn't known from the join itself; the list reloads it
   return { id: row.id, name: row.name, inviteCode: row.invite_code, memberCount: 0 };
 }
 

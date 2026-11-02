@@ -33,7 +33,6 @@ export default function GroupScreen() {
     else router.replace('/');
   };
 
-  // Two taps instead of a dialog, because Alert.alert does nothing on the web
   const handleLeave = async () => {
     if (!confirmLeave) {
       setConfirmLeave(true);

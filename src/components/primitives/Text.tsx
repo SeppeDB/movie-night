@@ -52,11 +52,9 @@ const sizes = StyleSheet.create({
   md: { fontSize: 15, lineHeight: 22 },
   lg: { fontSize: 18, lineHeight: 26 },
   xl: { fontSize: 32, lineHeight: 40 },
-  // Serif descenders (g, y, p) need ~1.2x the font size or Android clips them
   display: { fontSize: 72, lineHeight: 88 },
 });
 
-// Custom fonts carry their own weight, so each weight maps to a font file instead of fontWeight
 const weights = StyleSheet.create({
   normal: { fontFamily: fonts.body },
   medium: { fontFamily: fonts.bodyMedium },
