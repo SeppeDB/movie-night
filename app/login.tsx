@@ -1,13 +1,12 @@
 import { useState } from 'react';
-import { Pressable, Text as RNText, StyleSheet, View } from 'react-native';
+import { Pressable, StyleSheet, View } from 'react-native';
 import { Redirect, router } from 'expo-router';
 import { useAuthStore } from '../src/state/useAuthStore';
-import { Card } from '../src/components/primitives/Card';
 import { InputField } from '../src/components/primitives/InputField';
 import { StyledButton } from '../src/components/StyledButton';
 import { Stack } from '../src/components/primitives/Stack';
 import { Text } from '../src/components/primitives/Text';
-import { colors, spacing } from '../src/theme';
+import { colors, fonts, spacing } from '../src/theme';
 
 type Mode = 'login' | 'signup';
 
@@ -52,53 +51,55 @@ export default function LoginScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.content}>
-        <Stack gap="sm" align="center">
-          <RNText style={styles.logo}>🍿</RNText>
-          <Text size="xl" weight="bold" align="center">Movie Night</Text>
-          <Text align="center" color={colors.textMuted}>Pick tonight's movie together</Text>
+        <View>
+          <Text size="display" font="display">Movie</Text>
+          <Text size="display" font="display">
+            Night<Text size="display" font="display" color={colors.primary}>.</Text>
+          </Text>
+          <View style={styles.rule} />
+          <Text size="lg" color={colors.textMuted}>
+            Pick tonight's film{'\n'}with <Text size="lg" color={colors.text} style={styles.italic}>your</Text> people.
+          </Text>
+        </View>
+
+        <Stack gap="lg">
+          {mode === 'signup' && (
+            <InputField label="Name" value={name} onChangeText={setName} testID="name-input" />
+          )}
+          <InputField
+            label="Email"
+            value={email}
+            onChangeText={setEmail}
+            placeholder="you@example.com"
+            testID="email-input"
+          />
+          <InputField
+            label="Password"
+            value={password}
+            onChangeText={setPassword}
+            secureTextEntry
+            testID="password-input"
+            error={error !== '' ? error : undefined}
+          />
+          {info !== '' && <Text color={colors.success}>{info}</Text>}
         </Stack>
 
-        <Card>
-          <Stack gap="md" padding="lg">
-            <Text size="lg" weight="bold">
-              {mode === 'login' ? 'Welcome back' : 'Join the movie night'}
+        <Stack gap="md">
+          <StyledButton
+            label={mode === 'login' ? 'Log in' : 'Create account'}
+            onPress={handleSubmit}
+            isLoading={isLoading}
+            testID="login-button"
+          />
+          <Pressable onPress={toggleMode} testID="toggle-mode" style={styles.toggle}>
+            <Text color={colors.textMuted}>
+              {mode === 'login' ? 'New here? ' : 'Already a member? '}
+              <Text weight="medium" color={colors.text} style={styles.underline}>
+                {mode === 'login' ? 'Create an account' : 'Log in'}
+              </Text>
             </Text>
-            {mode === 'signup' && (
-              <InputField label="Name" value={name} onChangeText={setName} testID="name-input" />
-            )}
-            <InputField
-              label="Email"
-              value={email}
-              onChangeText={setEmail}
-              placeholder="you@example.com"
-              testID="email-input"
-            />
-            <InputField
-              label="Password"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-              testID="password-input"
-              error={error !== '' ? error : undefined}
-            />
-            {info !== '' && <Text color={colors.success}>{info}</Text>}
-            <StyledButton
-              label={mode === 'login' ? 'Log in' : 'Sign up'}
-              onPress={handleSubmit}
-              isLoading={isLoading}
-              testID="login-button"
-            />
-          </Stack>
-        </Card>
-
-        <Pressable onPress={toggleMode} testID="toggle-mode">
-          <Text align="center" color={colors.textMuted}>
-            {mode === 'login' ? 'No account yet? ' : 'Already have an account? '}
-            <Text weight="medium" color={colors.primary}>
-              {mode === 'login' ? 'Sign up' : 'Log in'}
-            </Text>
-          </Text>
-        </Pressable>
+          </Pressable>
+        </Stack>
       </View>
     </View>
   );
@@ -109,9 +110,13 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: spacing.md,
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.xl,
     backgroundColor: colors.background,
   },
-  content: { width: '100%', maxWidth: 400, gap: spacing.lg },
-  logo: { fontSize: 56, lineHeight: 64, textAlign: 'center' },
+  content: { width: '100%', maxWidth: 420, gap: spacing.xl + 8 },
+  rule: { width: 48, height: 3, backgroundColor: colors.primary, marginTop: spacing.lg, marginBottom: spacing.md },
+  italic: { fontFamily: fonts.displayItalic, fontSize: 20 },
+  underline: { textDecorationLine: 'underline' },
+  toggle: { alignSelf: 'flex-start', paddingVertical: spacing.sm },
 });

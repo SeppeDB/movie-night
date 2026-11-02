@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { TextInput, View, StyleSheet } from 'react-native';
 import { Text } from './Text';
-import { colors, radius, spacing } from '../../theme';
+import { colors, fonts } from '../../theme';
 
 interface InputFieldProps {
   label: string;
@@ -26,12 +26,14 @@ export function InputField({
 
   return (
     <View style={styles.container}>
-      <Text size="sm" weight="medium" color={colors.textMuted}>{label}</Text>
+      <Text size="sm" weight="medium" color={focused ? colors.primary : colors.textMuted}>
+        {label.toLowerCase()}
+      </Text>
       <TextInput
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
-        placeholderTextColor={colors.textMuted}
+        placeholderTextColor={colors.placeholder}
         secureTextEntry={secureTextEntry}
         onFocus={() => setFocused(true)}
         onBlur={() => setFocused(false)}
@@ -44,19 +46,19 @@ export function InputField({
   );
 }
 
+// Underline-only inputs, like a form printed on a poster
 const styles = StyleSheet.create({
-  container: { gap: 6 },
+  container: { gap: 4 },
   input: {
-    backgroundColor: colors.surfaceAlt,
+    backgroundColor: 'transparent',
     color: colors.text,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radius.md,
-    paddingHorizontal: spacing.md,
-    paddingVertical: 12,
+    fontFamily: fonts.body,
+    borderBottomWidth: 1,
+    borderBottomColor: colors.border,
+    paddingVertical: 10,
     // 16px or more stops iOS Safari from zooming in on focus
-    fontSize: 16,
+    fontSize: 18,
   },
-  inputFocused: { borderColor: colors.primary },
-  inputError: { borderColor: colors.danger },
+  inputFocused: { borderBottomColor: colors.primary },
+  inputError: { borderBottomColor: colors.danger },
 });

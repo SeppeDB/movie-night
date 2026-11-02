@@ -35,7 +35,10 @@ export function StyledButton({
       {isLoading ? (
         <Spinner size="small" color={contentColor} />
       ) : (
-        <Text weight="bold" color={contentColor}>{label}</Text>
+        <>
+          <Text size="lg" weight="bold" color={contentColor}>{label}</Text>
+          <Text size="lg" weight="bold" color={contentColor}>→</Text>
+        </>
       )}
     </Pressable>
   );
@@ -43,15 +46,16 @@ export function StyledButton({
 
 const styles = StyleSheet.create({
   base: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: 48,
-    paddingHorizontal: spacing.lg,
-    borderRadius: radius.md,
+    justifyContent: 'space-between',
+    minHeight: 56,
+    paddingHorizontal: spacing.md + 4,
+    borderRadius: radius.sm,
   },
   primary: { backgroundColor: colors.primary },
   primaryPressed: { backgroundColor: colors.primaryPressed },
   secondary: { backgroundColor: 'transparent', borderWidth: 1, borderColor: colors.border },
   secondaryPressed: { backgroundColor: colors.surfaceAlt },
-  disabled: { opacity: 0.6 },
+  disabled: { opacity: 0.6, justifyContent: 'center' },
 });

@@ -5,8 +5,8 @@
   "start_url": "/mobile-applications/",
   "scope": "/mobile-applications/",
   "display": "standalone",
-  "background_color": "#0F0F14",
-  "theme_color": "#0F0F14",
+  "background_color": "#0B0B0C",
+  "theme_color": "#0B0B0C",
   "icons": [
     { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
     { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
