@@ -18,8 +18,8 @@ export default function AppLayout() {
   return (
     <Stack
       screenOptions={{
-        headerStyle: { backgroundColor: colors.surface },
-        headerTintColor: colors.text,
+        // Pages draw their own poster-style headers and back links
+        headerShown: false,
         contentStyle: { backgroundColor: colors.background },
       }}
     />

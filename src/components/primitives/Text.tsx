@@ -10,6 +10,7 @@ interface TextProps {
   align?: 'left' | 'center' | 'right';
   numberOfLines?: number;
   style?: StyleProp<TextStyle>;
+  testID?: string;
 }
 
 export function Text({
@@ -21,6 +22,7 @@ export function Text({
   align = 'left',
   numberOfLines,
   style,
+  testID,
 }: TextProps) {
   return (
     <RNText
@@ -33,6 +35,7 @@ export function Text({
         style,
       ]}
       numberOfLines={numberOfLines}
+      testID={testID}
     >
       {children}
     </RNText>
