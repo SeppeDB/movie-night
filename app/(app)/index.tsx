@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
   },
   rowPressed: { backgroundColor: colors.surface },
   rowText: { flex: 1, gap: 4 },
-  groupName: { fontSize: 26, lineHeight: 30 },
+  groupName: { fontSize: 26, lineHeight: 32 },
   italic: { fontFamily: fonts.displayItalic },
   underline: { textDecorationLine: 'underline' },
   cancel: { alignSelf: 'flex-start', paddingVertical: spacing.sm },

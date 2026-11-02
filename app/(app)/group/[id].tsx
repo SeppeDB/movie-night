@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   content: { width: '100%', maxWidth: 520, alignSelf: 'center', gap: spacing.xl + 8 },
   back: { alignSelf: 'flex-start', paddingVertical: spacing.sm },
   centered: { paddingVertical: spacing.xl, alignItems: 'center' },
-  title: { fontSize: 52, lineHeight: 56 },
+  title: { fontSize: 52, lineHeight: 64 },
   rule: { width: 48, height: 3, backgroundColor: colors.primary, marginTop: spacing.lg },
   code: { fontSize: 44, lineHeight: 50, letterSpacing: 6, color: colors.primary },
   list: { borderTopWidth: 1, borderTopColor: colors.border },
