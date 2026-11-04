@@ -57,9 +57,6 @@ export default function LoginScreen() {
             Night<Text size="display" font="display" color={colors.primary}>.</Text>
           </Text>
           <View style={styles.rule} />
-          <Text size="lg" color={colors.textMuted}>
-            Pick tonight's film{'\n'}with <Text size="lg" color={colors.text} style={styles.italic}>your</Text> people.
-          </Text>
         </View>
 
         <Stack gap="lg">

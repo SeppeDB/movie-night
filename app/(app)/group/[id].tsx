@@ -88,11 +88,6 @@ export default function GroupScreen() {
               </View>
             </Stack>
 
-            <Stack gap="sm">
-              <Text size="lg" style={styles.italic}>Suggestions are coming soon.</Text>
-              <Text color={colors.textMuted}>Next up: search a film and put it to the vote.</Text>
-            </Stack>
-
             <Pressable onPress={handleLeave} style={styles.leave} testID="leave-group-button">
               <Text color={confirmLeave ? colors.danger : colors.textMuted} style={styles.underline}>
                 {confirmLeave ? 'Tap again to leave this group' : 'Leave group'}
