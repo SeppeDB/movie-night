@@ -22,4 +22,4 @@ yarn-error.*
 expo-env.d.ts
 # @end expo-cli
 storybook-static/
-/supabase
+/TODO.md
