@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Pressable, StyleSheet, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { router, useLocalSearchParams } from 'expo-router';
 import { getGroup, leaveGroup } from '../../../src/services/groupService';
 import type { GroupDetails } from '../../../src/types/Group';
@@ -7,6 +7,8 @@ import { Screen } from '../../../src/components/primitives/Screen';
 import { Stack } from '../../../src/components/primitives/Stack';
 import { Text } from '../../../src/components/primitives/Text';
 import { Spinner } from '../../../src/components/primitives/Spinner';
+import { IconButton } from '../../../src/components/IconButton';
+import { StyledButton } from '../../../src/components/StyledButton';
 import { colors, fonts, spacing } from '../../../src/theme';
 
 export default function GroupScreen() {
@@ -50,9 +52,9 @@ export default function GroupScreen() {
   return (
     <Screen padding="lg">
       <View style={styles.content}>
-        <Pressable onPress={goBack} style={styles.back} testID="back-button">
-          <Text size="sm" color={colors.textMuted}>← all nights</Text>
-        </Pressable>
+        <View style={styles.topBar}>
+          <IconButton icon="arrow-back" onPress={goBack} accessibilityLabel="Back to your nights" testID="back-button" />
+        </View>
 
         {error !== '' ? (
           <Text color={colors.danger}>{error}</Text>
@@ -88,11 +90,12 @@ export default function GroupScreen() {
               </View>
             </Stack>
 
-            <Pressable onPress={handleLeave} style={styles.leave} testID="leave-group-button">
-              <Text color={confirmLeave ? colors.danger : colors.textMuted} style={styles.underline}>
-                {confirmLeave ? 'Tap again to leave this group' : 'Leave group'}
-              </Text>
-            </Pressable>
+            <StyledButton
+              label={confirmLeave ? 'Tap again to leave' : 'Leave group'}
+              variant="danger"
+              onPress={handleLeave}
+              testID="leave-group-button"
+            />
           </>
         )}
       </View>
@@ -102,7 +105,7 @@ export default function GroupScreen() {
 
 const styles = StyleSheet.create({
   content: { width: '100%', maxWidth: 520, alignSelf: 'center', gap: spacing.xl + 8 },
-  back: { alignSelf: 'flex-start', paddingVertical: spacing.sm },
+  topBar: { flexDirection: 'row', marginLeft: -12 },
   centered: { paddingVertical: spacing.xl, alignItems: 'center' },
   title: { fontSize: 52, lineHeight: 64 },
   rule: { width: 48, height: 3, backgroundColor: colors.primary, marginTop: spacing.lg },
@@ -110,6 +113,4 @@ const styles = StyleSheet.create({
   list: { borderTopWidth: 1, borderTopColor: colors.border },
   row: { paddingVertical: spacing.md, borderBottomWidth: 1, borderBottomColor: colors.border },
   italic: { fontFamily: fonts.displayItalic },
-  underline: { textDecorationLine: 'underline' },
-  leave: { alignSelf: 'flex-start', paddingVertical: spacing.sm },
 });

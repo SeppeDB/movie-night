@@ -10,6 +10,7 @@ import { Text } from '../../src/components/primitives/Text';
 import { InputField } from '../../src/components/primitives/InputField';
 import { Spinner } from '../../src/components/primitives/Spinner';
 import { StyledButton } from '../../src/components/StyledButton';
+import { IconButton } from '../../src/components/IconButton';
 import { colors, fonts, spacing } from '../../src/theme';
 
 type Panel = 'none' | 'create' | 'join';
@@ -71,10 +72,14 @@ export default function GroupsScreen() {
     <Screen padding="lg">
       <View style={styles.content}>
         <View style={styles.topBar}>
-          <Text size="sm" color={colors.textMuted}>{user?.name ?? ''}</Text>
-          <Pressable onPress={logout} testID="logout-button">
-            <Text size="sm" color={colors.textMuted} style={styles.underline}>log out</Text>
-          </Pressable>
+          <Text color={colors.textMuted}>{user?.name ?? ''}</Text>
+          <IconButton
+            icon="log-out-outline"
+            onPress={logout}
+            accessibilityLabel="Log out"
+            color={colors.textMuted}
+            testID="logout-button"
+          />
         </View>
 
         <View>
@@ -92,9 +97,7 @@ export default function GroupsScreen() {
         ) : loadError !== '' ? (
           <Stack gap="md">
             <Text color={colors.danger}>{loadError}</Text>
-            <Pressable onPress={loadGroups}>
-              <Text style={styles.underline}>Try again</Text>
-            </Pressable>
+            <StyledButton label="Try again" variant="secondary" onPress={loadGroups} />
           </Stack>
         ) : groups.length === 0 ? (
           <Stack gap="sm">
@@ -148,9 +151,7 @@ export default function GroupsScreen() {
               isLoading={isSubmitting}
               testID="group-submit-button"
             />
-            <Pressable onPress={() => togglePanel('none')} style={styles.cancel}>
-              <Text color={colors.textMuted} style={styles.underline}>Cancel</Text>
-            </Pressable>
+            <StyledButton label="Cancel" variant="ghost" onPress={() => togglePanel('none')} testID="cancel-button" />
           </Stack>
         )}
       </View>
@@ -160,7 +161,7 @@ export default function GroupsScreen() {
 
 const styles = StyleSheet.create({
   content: { width: '100%', maxWidth: 520, alignSelf: 'center', gap: spacing.xl + 8 },
-  topBar: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  topBar: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginRight: -12 },
   rule: { width: 48, height: 3, backgroundColor: colors.primary, marginTop: spacing.lg },
   centered: { paddingVertical: spacing.xl, alignItems: 'center' },
   list: { borderTopWidth: 1, borderTopColor: colors.border },
@@ -176,6 +177,4 @@ const styles = StyleSheet.create({
   rowText: { flex: 1, gap: 4 },
   groupName: { fontSize: 26, lineHeight: 32 },
   italic: { fontFamily: fonts.displayItalic },
-  underline: { textDecorationLine: 'underline' },
-  cancel: { alignSelf: 'flex-start', paddingVertical: spacing.sm },
 });

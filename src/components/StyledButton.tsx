@@ -3,13 +3,29 @@ import { Spinner } from './primitives/Spinner';
 import { Text } from './primitives/Text';
 import { colors, radius, spacing } from '../theme';
 
+type Variant = 'primary' | 'secondary' | 'ghost' | 'danger';
+
 interface StyledButtonProps {
   label: string;
   onPress: () => void;
-  variant?: 'primary' | 'secondary';
+  variant?: Variant;
   isLoading?: boolean;
   testID?: string;
 }
+
+const contentColors: Record<Variant, string> = {
+  primary: colors.onPrimary,
+  secondary: colors.text,
+  ghost: colors.textMuted,
+  danger: colors.danger,
+};
+
+const pressedStyles = {
+  primary: { backgroundColor: colors.primaryPressed },
+  secondary: { backgroundColor: colors.surfaceAlt },
+  ghost: { backgroundColor: colors.surface },
+  danger: { backgroundColor: colors.surface },
+};
 
 export function StyledButton({
   label,
@@ -18,16 +34,19 @@ export function StyledButton({
   isLoading = false,
   testID,
 }: StyledButtonProps) {
-  const contentColor = variant === 'primary' ? colors.onPrimary : colors.text;
+  const contentColor = contentColors[variant];
+  const showArrow = variant === 'primary' || variant === 'secondary';
 
   return (
     <Pressable
       onPress={onPress}
       disabled={isLoading}
+      accessibilityRole="button"
       style={({ pressed }) => [
         styles.base,
         styles[variant],
-        pressed && (variant === 'primary' ? styles.primaryPressed : styles.secondaryPressed),
+        !showArrow && styles.centered,
+        pressed && pressedStyles[variant],
         isLoading && styles.disabled,
       ]}
       testID={testID}
@@ -36,8 +55,8 @@ export function StyledButton({
         <Spinner size="small" color={contentColor} />
       ) : (
         <>
-          <Text size="lg" weight="bold" color={contentColor}>{label}</Text>
-          <Text size="lg" weight="bold" color={contentColor}>→</Text>
+          <Text size="lg" weight={variant === 'ghost' ? 'medium' : 'bold'} color={contentColor}>{label}</Text>
+          {showArrow && <Text size="lg" weight="bold" color={contentColor}>→</Text>}
         </>
       )}
     </Pressable>
@@ -53,9 +72,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.md + 4,
     borderRadius: radius.sm,
   },
+  centered: { justifyContent: 'center' },
   primary: { backgroundColor: colors.primary },
-  primaryPressed: { backgroundColor: colors.primaryPressed },
   secondary: { backgroundColor: 'transparent', borderWidth: 1, borderColor: colors.border },
-  secondaryPressed: { backgroundColor: colors.surfaceAlt },
+  ghost: { backgroundColor: 'transparent', minHeight: 48 },
+  danger: { backgroundColor: 'transparent', borderWidth: 1, borderColor: colors.danger },
   disabled: { opacity: 0.6, justifyContent: 'center' },
 });

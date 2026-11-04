@@ -88,7 +88,7 @@ export default function LoginScreen() {
             isLoading={isLoading}
             testID="login-button"
           />
-          <Pressable onPress={toggleMode} testID="toggle-mode" style={styles.toggle}>
+          <Pressable onPress={toggleMode} accessibilityRole="button" testID="toggle-mode" style={styles.toggle}>
             <Text color={colors.textMuted}>
               {mode === 'login' ? 'New here? ' : 'Already a member? '}
               <Text weight="medium" color={colors.text} style={styles.underline}>
@@ -115,5 +115,5 @@ const styles = StyleSheet.create({
   rule: { width: 48, height: 3, backgroundColor: colors.primary, marginTop: spacing.lg, marginBottom: spacing.md },
   italic: { fontFamily: fonts.displayItalic, fontSize: 20 },
   underline: { textDecorationLine: 'underline' },
-  toggle: { alignSelf: 'flex-start', paddingVertical: spacing.sm },
+  toggle: { alignSelf: 'flex-start', minHeight: 48, justifyContent: 'center' },
 });
