@@ -65,8 +65,8 @@ export default function GroupScreen() {
         ) : (
           <>
             <View>
-              <Text font="display" style={styles.title}>
-                {group.name}<Text font="display" style={styles.title} color={colors.primary}>.</Text>
+              <Text font="display" style={styles.title} testID="group-title">
+                {group.name}{'⁠'}<Text font="display" style={styles.title} color={colors.primary}>.</Text>
               </Text>
               <View style={styles.rule} />
             </View>
@@ -107,8 +107,8 @@ const styles = StyleSheet.create({
   content: { width: '100%', maxWidth: 520, alignSelf: 'center', gap: spacing.xl + 8 },
   topBar: { flexDirection: 'row', marginLeft: -12 },
   centered: { paddingVertical: spacing.xl, alignItems: 'center' },
-  title: { fontSize: 52, lineHeight: 64 },
   rule: { width: 48, height: 3, backgroundColor: colors.primary, marginTop: spacing.lg },
+  title: { fontSize: 44, lineHeight: 54 },
   code: { fontSize: 44, lineHeight: 50, letterSpacing: 6, color: colors.primary },
   list: { borderTopWidth: 1, borderTopColor: colors.border },
   row: { paddingVertical: spacing.md, borderBottomWidth: 1, borderBottomColor: colors.border },
