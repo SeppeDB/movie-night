@@ -20,7 +20,8 @@ export function Row({
       style={[
         styles.base,
         styles[`gap_${gap}` as keyof typeof styles],
-        { alignItems: align, justifyContent: justify },
+        alignments[align],
+        justifications[justify],
         wrap && styles.wrap,
       ]}
     >
@@ -36,4 +37,18 @@ const styles = StyleSheet.create({
   gap_sm: {},
   gap_md: {},
   gap_lg: {},
+});
+
+const alignments = StyleSheet.create({
+  'flex-start': { alignItems: 'flex-start' },
+  center: { alignItems: 'center' },
+  'flex-end': { alignItems: 'flex-end' },
+  stretch: { alignItems: 'stretch' },
+});
+
+const justifications = StyleSheet.create({
+  'flex-start': { justifyContent: 'flex-start' },
+  center: { justifyContent: 'center' },
+  'flex-end': { justifyContent: 'flex-end' },
+  'space-between': { justifyContent: 'space-between' },
 });

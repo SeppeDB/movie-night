@@ -24,7 +24,8 @@ export function Stack({
         styles.base,
         styles[`gap_${gap}` as keyof typeof styles],
         styles[`padding_${padding}` as keyof typeof styles],
-        { alignItems: align, justifyContent: justify },
+        alignments[align],
+        justifications[justify],
         flex !== undefined && { flex },
       ]}
     >
@@ -43,4 +44,18 @@ const styles = StyleSheet.create({
   padding_sm: { padding: spacing.sm },
   padding_md: { padding: spacing.md },
   padding_lg: { padding: spacing.lg },
+});
+
+const alignments = StyleSheet.create({
+  'flex-start': { alignItems: 'flex-start' },
+  center: { alignItems: 'center' },
+  'flex-end': { alignItems: 'flex-end' },
+  stretch: { alignItems: 'stretch' },
+});
+
+const justifications = StyleSheet.create({
+  'flex-start': { justifyContent: 'flex-start' },
+  center: { justifyContent: 'center' },
+  'flex-end': { justifyContent: 'flex-end' },
+  'space-between': { justifyContent: 'space-between' },
 });

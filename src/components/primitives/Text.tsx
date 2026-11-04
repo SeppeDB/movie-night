@@ -30,7 +30,7 @@ export function Text({
         styles.base,
         sizes[size],
         font === 'display' ? styles.serif : weights[weight],
-        { textAlign: align },
+        alignments[align],
         color !== undefined && { color },
         style,
       ]}
@@ -59,4 +59,10 @@ const weights = StyleSheet.create({
   normal: { fontFamily: fonts.body },
   medium: { fontFamily: fonts.bodyMedium },
   bold: { fontFamily: fonts.bodyBold },
+});
+
+const alignments = StyleSheet.create({
+  left: { textAlign: 'left' },
+  center: { textAlign: 'center' },
+  right: { textAlign: 'right' },
 });

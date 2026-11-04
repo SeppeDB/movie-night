@@ -13,20 +13,6 @@ interface StyledButtonProps {
   testID?: string;
 }
 
-const contentColors: Record<Variant, string> = {
-  primary: colors.onPrimary,
-  secondary: colors.text,
-  ghost: colors.textMuted,
-  danger: colors.danger,
-};
-
-const pressedStyles = {
-  primary: { backgroundColor: colors.primaryPressed },
-  secondary: { backgroundColor: colors.surfaceAlt },
-  ghost: { backgroundColor: colors.surface },
-  danger: { backgroundColor: colors.surface },
-};
-
 export function StyledButton({
   label,
   onPress,
@@ -79,3 +65,17 @@ const styles = StyleSheet.create({
   danger: { backgroundColor: 'transparent', borderWidth: 1, borderColor: colors.danger },
   disabled: { opacity: 0.6, justifyContent: 'center' },
 });
+
+const pressedStyles = StyleSheet.create({
+  primary: { backgroundColor: colors.primaryPressed },
+  secondary: { backgroundColor: colors.surfaceAlt },
+  ghost: { backgroundColor: colors.surface },
+  danger: { backgroundColor: colors.surface },
+});
+
+const contentColors: Record<Variant, string> = {
+  primary: colors.onPrimary,
+  secondary: colors.text,
+  ghost: colors.textMuted,
+  danger: colors.danger,
+};
