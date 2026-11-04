@@ -24,7 +24,7 @@
     "plugins": ["expo-router"],
     "experiments": {
       "typedRoutes": true,
-      "baseUrl": "/mobile-applications"
+      "baseUrl": "/movie-night"
     }
   }
 }

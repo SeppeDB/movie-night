@@ -2,7 +2,7 @@
 
 Pick tonight's film together.
 
-**Live app:** https://seppedb.github.io/mobile-applications/
+**Live app:** https://seppedb.github.io/movie-night/
 
 ## About the project
 
@@ -18,7 +18,7 @@ It is a Progressive Web App (PWA) built for Android: open it in Chrome and insta
 
 ## Live app and demo login
 
-**Public link:** https://seppedb.github.io/mobile-applications/
+**Public link:** https://seppedb.github.io/movie-night/
 
 Log in with this demo account. It is already a member of a group, so there is something to see:
 
@@ -96,8 +96,8 @@ Movie Night fills the gap between these: a small, focused tool for the **decisio
 
 1. Clone the repository and install the dependencies:
    ```sh
-   git clone https://github.com/SeppeDB/mobile-applications.git
-   cd mobile-applications
+   git clone https://github.com/SeppeDB/movie-night.git
+   cd movie-night
    npm install
    ```
 2. Create a `.env` file in the project root with your Supabase project URL and publishable (anon) key:

@@ -1,7 +1,7 @@
 import { ScrollViewStyleReset, useServerDocumentContext } from 'expo-router/html';
 import type { PropsWithChildren } from 'react';
 
-const base = '/mobile-applications';
+const base = '/movie-night';
 
 const registerServiceWorker = `
   if ('serviceWorker' in navigator) {
