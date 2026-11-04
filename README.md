@@ -24,8 +24,8 @@ Log in with this demo account. It is already a member of a group, so there is so
 
 | | |
 |---|---|
-| Email | `<DEMO EMAIL>` |
-| Password | `<DEMO PASSWORD>` |
+| Email | `demo@movienight.app` |
+| Password | `MovieNight-demo-2026` |
 
 You can also create your own account with **Create an account** on the login screen.
 
