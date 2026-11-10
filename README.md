@@ -36,8 +36,11 @@ You can also create your own account with **Create an account** on the login scr
 | Screen | URL | What you can do |
 |---|---|---|
 | Login | `/login` | Log in or create an account |
-| Your nights | `/` | See your groups, start a new group, or join one with an invite code |
-| Group | `/group/<id>` | See the group's invite code and members, or leave the group. Open it by tapping a group on *Your nights*. |
+| Nights | `/` | See your groups. Tap **+** to start a group or join one with an invite code. |
+| Group | `/group/<id>` | See the members. Use **⋮** to invite friends or leave the group. Open it by tapping a group on *Nights*. |
+| Profile | `/profile` | Change your display name or log out |
+
+Switch between *Nights* and *Profile* with the tab bar at the bottom.
 
 The data is stored in a hosted [Supabase](https://supabase.com) database (PostgreSQL). Row Level Security makes sure you only see the groups you are a member of.
 
@@ -57,6 +60,8 @@ Typical user: 18–35, watches through several streaming services, and plans the
 - [x] Installable PWA: manifest, icons, service worker with offline fallback
 - [x] Automatic deployment to GitHub Pages
 - [x] Groups: create a group, join it with an invite code, see the members, leave
+- [x] Profile: change your display name
+- [x] Android-style layout: bottom tab bar, floating + button, menus and the share sheet for invites
 - [ ] Movie search through the TMDB API, via a Supabase Edge Function so the API key stays secret
 - [ ] Movie nights: each group runs one night at a time (suggesting → voting → results)
 - [ ] Suggest films for the current night, with poster, year and synopsis
@@ -75,15 +80,6 @@ Typical user: 18–35, watches through several streaming services, and plans the
 | Teleparty | Watch Netflix and others in sync with friends | Helps you watch together *after* you've picked; Movie Night is about the picking |
 
 Movie Night fills the gap between these: a small, focused tool for the **decision** itself, made fair by letting everyone suggest and vote.
-
-## Built with
-
-- [Expo](https://expo.dev) and [React Native](https://reactnative.dev), exported to the web with React Native Web
-- [Expo Router](https://docs.expo.dev/router/introduction/): file-based routing with statically rendered pages
-- [Supabase](https://supabase.com): authentication and a PostgreSQL database
-- [Zustand](https://zustand.docs.pmnd.rs): state management
-- [TypeScript](https://www.typescriptlang.org)
-- GitHub Actions and GitHub Pages: build and hosting
 
 ## Getting started
 
@@ -122,8 +118,10 @@ The two Supabase values are stored as repository variables under **Settings → 
 app/                  Screens (Expo Router: every file is a route)
   login.tsx           Login and sign-up
   (app)/              Screens that need a logged-in user
-    index.tsx         Your nights: list, create and join groups
-    group/[id].tsx    One group: invite code and members
+    (tabs)/           Screens with the bottom tab bar
+      index.tsx       Nights: list, create and join groups
+      profile.tsx     Profile: display name and log out
+    group/[id].tsx    One group: members, invite, leave
   +html.tsx           HTML template: PWA manifest, icons, service worker
 src/
   components/         Reusable UI (buttons, inputs, text, …)
