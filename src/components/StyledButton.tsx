@@ -10,6 +10,7 @@ interface StyledButtonProps {
   onPress: () => void;
   variant?: Variant;
   isLoading?: boolean;
+  arrow?: boolean;
   testID?: string;
 }
 
@@ -18,10 +19,11 @@ export function StyledButton({
   onPress,
   variant = 'primary',
   isLoading = false,
+  arrow = true,
   testID,
 }: StyledButtonProps) {
   const contentColor = contentColors[variant];
-  const showArrow = variant === 'primary' || variant === 'secondary';
+  const showArrow = arrow && (variant === 'primary' || variant === 'secondary');
 
   return (
     <Pressable

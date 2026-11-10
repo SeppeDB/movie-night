@@ -1,4 +1,4 @@
-import { useCallback, useState, type ComponentProps } from 'react';
+import { useCallback, useState } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { router, useFocusEffect } from 'expo-router';
 import { createGroup, getMyGroups, joinGroup } from '../../../src/services/groupService';
@@ -13,14 +13,15 @@ import { StyledButton } from '../../../src/components/StyledButton';
 import { AppBar } from '../../../src/components/AppBar';
 import { Fab } from '../../../src/components/Fab';
 import { BottomSheet } from '../../../src/components/BottomSheet';
+import { SheetOption } from '../../../src/components/SheetOption';
 import { colors, fonts, layout, spacing } from '../../../src/theme';
 
 type Sheet = 'closed' | 'choose' | 'create' | 'join';
 
 const sheetTitles: Record<Sheet, string | undefined> = {
   closed: undefined,
-  choose: 'New night',
-  create: 'Start a night',
+  choose: 'New group',
+  create: 'Start a group',
   join: 'Join with a code',
 };
 
@@ -83,7 +84,7 @@ export default function GroupsScreen() {
           <View>
             <Text size="display" font="display">Your</Text>
             <Text size="display" font="display">
-              nights<Text size="display" font="display" color={colors.primary}>.</Text>
+              groups<Text size="display" font="display" color={colors.primary}>.</Text>
             </Text>
             <View style={styles.rule} />
           </View>
@@ -99,7 +100,7 @@ export default function GroupsScreen() {
             </Stack>
           ) : groups.length === 0 ? (
             <Stack gap="sm">
-              <Text size="lg" style={styles.italic}>No movie nights yet.</Text>
+              <Text size="lg" style={styles.italic}>No groups yet.</Text>
               <Text color={colors.textMuted}>Tap + to start one, or join a friend's with their invite code.</Text>
             </Stack>
           ) : (
@@ -125,20 +126,20 @@ export default function GroupsScreen() {
         </View>
       </Screen>
 
-      <Fab icon="add" onPress={() => openSheet('choose')} accessibilityLabel="Start or join a night" testID="fab" />
+      <Fab icon="add" onPress={() => openSheet('choose')} accessibilityLabel="Start or join a group" testID="fab" />
 
       <BottomSheet visible={sheet !== 'closed'} onClose={() => openSheet('closed')} title={sheetTitles[sheet]}>
         {sheet === 'choose' ? (
           <View style={styles.options}>
             <SheetOption
-              icon="add-circle-outline"
-              title="Start a night"
+              icon={<Icon name="add-circle-outline" size={28} color={colors.primary} />}
+              title="Start a group"
               subtitle="Create a group and invite your friends"
               onPress={() => openSheet('create')}
               testID="start-group-option"
             />
             <SheetOption
-              icon="enter-outline"
+              icon={<Icon name="enter-outline" size={28} color={colors.primary} />}
               title="Join with a code"
               subtitle="Got an invite code from a friend?"
               onPress={() => openSheet('join')}
@@ -171,32 +172,6 @@ export default function GroupsScreen() {
   );
 }
 
-interface SheetOptionProps {
-  icon: ComponentProps<typeof Icon>['name'];
-  title: string;
-  subtitle: string;
-  onPress: () => void;
-  testID?: string;
-}
-
-function SheetOption({ icon, title, subtitle, onPress, testID }: SheetOptionProps) {
-  return (
-    <Pressable
-      onPress={onPress}
-      accessibilityRole="button"
-      style={({ pressed }) => [styles.option, pressed && styles.rowPressed]}
-      testID={testID}
-    >
-      <Icon name={icon} size={28} color={colors.primary} />
-      <View style={styles.rowText}>
-        <Text size="lg" weight="bold">{title}</Text>
-        <Text size="sm" color={colors.textMuted}>{subtitle}</Text>
-      </View>
-      <Icon name="chevron-forward" size={20} color={colors.textMuted} />
-    </Pressable>
-  );
-}
-
 const styles = StyleSheet.create({
   page: { flex: 1 },
   content: {
@@ -222,13 +197,4 @@ const styles = StyleSheet.create({
   groupName: { fontSize: 26, lineHeight: 32 },
   italic: { fontFamily: fonts.displayItalic },
   options: { borderTopWidth: 1, borderTopColor: colors.border },
-  option: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.md,
-    minHeight: 72,
-    paddingVertical: spacing.md,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-  },
 });

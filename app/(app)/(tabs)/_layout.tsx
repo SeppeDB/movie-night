@@ -9,7 +9,7 @@ export default function TabsLayout() {
       <TabSlot style={styles.slot} />
       <TabList style={styles.tabBar}>
         <TabTrigger name="index" href="/" asChild>
-          <TabButton icon="film-outline" activeIcon="film" label="Nights" />
+          <TabButton icon="people-outline" activeIcon="people" label="Groups" />
         </TabTrigger>
         <TabTrigger name="profile" href="/profile" asChild>
           <TabButton icon="person-outline" activeIcon="person" label="Profile" />

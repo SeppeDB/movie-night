@@ -34,18 +34,15 @@ export function Dialog({
           <Text font="display" style={styles.title}>{title}</Text>
           {message !== undefined && <Text color={colors.textMuted}>{message}</Text>}
           <View style={styles.actions}>
-            <View style={styles.action}>
-              <StyledButton label={cancelLabel} variant="ghost" onPress={onCancel} testID="dialog-cancel" />
-            </View>
-            <View style={styles.action}>
-              <StyledButton
-                label={confirmLabel}
-                variant={variant === 'danger' ? 'danger' : 'primary'}
-                onPress={onConfirm}
-                isLoading={isLoading}
-                testID="dialog-confirm"
-              />
-            </View>
+            <StyledButton
+              label={confirmLabel}
+              variant={variant === 'danger' ? 'danger' : 'primary'}
+              onPress={onConfirm}
+              isLoading={isLoading}
+              arrow={false}
+              testID="dialog-confirm"
+            />
+            <StyledButton label={cancelLabel} variant="ghost" onPress={onCancel} testID="dialog-cancel" />
           </View>
         </View>
       </View>
@@ -67,6 +64,5 @@ const styles = StyleSheet.create({
     gap: spacing.md,
   },
   title: { fontSize: 26, lineHeight: 32 },
-  actions: { flexDirection: 'row', gap: spacing.sm, marginTop: spacing.sm },
-  action: { flex: 1 },
+  actions: { gap: spacing.sm, marginTop: spacing.sm },
 });

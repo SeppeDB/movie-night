@@ -36,11 +36,11 @@ You can also create your own account with **Create an account** on the login scr
 | Screen | URL | What you can do |
 |---|---|---|
 | Login | `/login` | Log in or create an account |
-| Nights | `/` | See your groups. Tap **+** to start a group or join one with an invite code. |
-| Group | `/group/<id>` | See the members. Use **⋮** to invite friends or leave the group. Open it by tapping a group on *Nights*. |
+| Groups | `/` | See your groups. Tap **+** to start a group or join one with an invite code. |
+| Group | `/group/<id>` | See the members; the owner has a crown. Use **⋮** to invite friends or leave. The owner can also rename or delete the group, and tap a member to make them owner or remove them. |
 | Profile | `/profile` | Change your display name or log out |
 
-Switch between *Nights* and *Profile* with the tab bar at the bottom.
+Switch between *Groups* and *Profile* with the tab bar at the bottom.
 
 The data is stored in a hosted [Supabase](https://supabase.com) database (PostgreSQL). Row Level Security makes sure you only see the groups you are a member of.
 
@@ -60,6 +60,7 @@ Typical user: 18–35, watches through several streaming services, and plans the
 - [x] Installable PWA: manifest, icons, service worker with offline fallback
 - [x] Automatic deployment to GitHub Pages
 - [x] Groups: create a group, join it with an invite code, see the members, leave
+- [x] Group management: owner role, rename, delete, new invite code, transfer ownership, remove members
 - [x] Profile: change your display name
 - [x] Android-style layout: bottom tab bar, floating + button, menus and the share sheet for invites
 - [ ] Movie search through the TMDB API, via a Supabase Edge Function so the API key stays secret
@@ -101,7 +102,7 @@ Movie Night fills the gap between these: a small, focused tool for the **decisio
    EXPO_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
    EXPO_PUBLIC_SUPABASE_ANON_KEY=your-publishable-key
    ```
-3. In the Supabase dashboard, open the **SQL Editor** and run [`supabase/001_groups.sql`](supabase/001_groups.sql). It creates the tables, security rules and functions.
+3. In the Supabase dashboard, open the **SQL Editor** and run the files in [`supabase/`](supabase/) in order: `001_groups.sql`, then `002_group_management.sql`. They create the tables, security rules and functions.
 4. Start the app in the browser:
    ```sh
    npx expo start --web
@@ -119,7 +120,7 @@ app/                  Screens (Expo Router: every file is a route)
   login.tsx           Login and sign-up
   (app)/              Screens that need a logged-in user
     (tabs)/           Screens with the bottom tab bar
-      index.tsx       Nights: list, create and join groups
+      index.tsx       Groups: list, create and join groups
       profile.tsx     Profile: display name and log out
     group/[id].tsx    One group: members, invite, leave
   +html.tsx           HTML template: PWA manifest, icons, service worker
