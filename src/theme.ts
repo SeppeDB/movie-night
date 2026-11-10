@@ -12,7 +12,10 @@ export const colors = {
   onPrimary: '#0B0B0C',
   danger: '#E5604D',
   success: '#A3C47C',
+  overlay: 'rgba(0, 0, 0, 0.6)',
 };
+
+export const layout = { maxContentWidth: 520, maxBarWidth: 568, appBarHeight: 56 };
 
 export const fonts = {
   display: 'Fraunces_600SemiBold',

@@ -5,6 +5,7 @@ import {
   logout as logoutService,
   onAuthChange,
   signUp as signUpService,
+  updateName as updateNameService,
 } from "../services/authService";
 import type { User } from "../types/User";
 
@@ -17,6 +18,7 @@ interface AuthState {
   login: (email: string, password: string) => Promise<void>;
   signUp: (name: string, email: string, password: string) => Promise<boolean>;
   logout: () => Promise<void>;
+  updateName: (name: string) => Promise<void>;
 }
 
 export const useAuthStore = create<AuthState>((set) => ({
@@ -55,5 +57,9 @@ export const useAuthStore = create<AuthState>((set) => ({
   logout: async () => {
     await logoutService();
     set({ user: null, isAuthenticated: false });
+  },
+  updateName: async (name) => {
+    const user = await updateNameService(name);
+    set({ user });
   },
 }));

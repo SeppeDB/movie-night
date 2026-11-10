@@ -28,6 +28,14 @@ export async function logout(): Promise<void> {
   if (error !== null) throw error;
 }
 
+export async function updateName(name: string): Promise<User> {
+  const { data, error } = await supabase.auth.updateUser({ data: { name } });
+  if (error !== null) throw error;
+  const { error: profileError } = await supabase.from("profiles").update({ name }).eq("id", data.user.id);
+  if (profileError !== null) throw new Error(profileError.message);
+  return toUser(data.user);
+}
+
 export async function getCurrentUser(): Promise<User | null> {
   const { data } = await supabase.auth.getSession();
   return data.session !== null ? toUser(data.session.user) : null;
